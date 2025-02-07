@@ -41,9 +41,6 @@ _install_deps() {
     _log "[ ! ] Select 'yad' and then 'multimedia_proaudio' or 'Dead_Mozay' repo"
     read -p "[ ? ] Press 'Enter' to install 'yad' from opi."
     opi yad
-
-    _log "[ i ] Installing dependencies from Python"
-    pip3 install pywal https://github.com/T-Dynamos/materialyoucolor-python/archive/master.zip --break-system-packages
 }
 
 _fetch_configs() {
