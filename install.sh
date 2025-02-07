@@ -27,7 +27,7 @@ _cleanup() {
 }
 
 _add_repo() {
-    if ! zypper lr --alias rifux.dev &>/dev/null; then    
+    if ! zypper lr --alias home_rifux.dev &>/dev/null; then    
         _log "[ i ] Adding home:rifux.dev repository"
         sudo zypper --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
         sudo zypper ref
@@ -36,8 +36,8 @@ _add_repo() {
 
 _install_deps() {
     _log "[ i ] Installing dependencies from Tumbleweed repo"
-    sudo zypper in axel blueprint-compiler bluez bluez-auto-enable-devices bluez-cups bluez-firmware brightnessctl cairomm-devel cairomm1_0-devel cargo cmake coreutils curl ddcutil file-devel fish fontconfig foot fuzzel gammastep gdouros-symbola-fonts gjs gjs-devel gnome-bluetooth gnome-bluetooth gnome-bluetooth gnome-control-center gnome-keyring gobject-introspection gobject-introspection-devel gojq grim gtk-layer-shell-devel gtk3 gtk3-metatheme-adwaita gtk4-devel gtkmm3-devel gtksourceview-devel gtksourceviewmm-devel gtksourceviewmm3_0-devel hypridle hyprland hyprlang-devel jetbrains-mono-fonts kernel-firmware-bluetooth lato-fonts libadwaita-devel libcairomm-1_0-1 libcairomm-1_16-1 libdbusmenu-gtk3-4 libdbusmenu-gtk3-devel libdbusmenu-gtk4 libdrm-devel libgbm-devel libgnome-bluetooth-3_0-13 libgtksourceview-3_0-1 libgtksourceviewmm-3_0-0 libgtksourceviewmm-4_0-0 libjxl-devel libpulse-devel libqt5-qtwayland libsass-3_6_6-1 libsass-devel libsoup-devel libspng0-devel libtinyxml0 libtinyxml2-10 libwebp-devel libxdp-devel Mesa-libGLESv2-devel Mesa-libGLESv3-devel meson NetworkManager npm opi pam-devel pavucontrol playerctl polkit-gnome pugixml-devel python3-anyascii python3-base python3-build python3-gobject-devel python3-libsass python3-material-color-utilities-python python3-Pillow python3-pip python3-psutil python3-pywayland python3-regex python3-setuptools_scm python3-svglib python3-wheel qt5ct qt6-quickcontrols2-devel qt6-wayland qt6-waylandclient-devel qt6-waylandclient-private-devel qt6-widgets-devel ripgrep rsync scdoc slurp starship swappy swww systemd-devel tesseract tesseract-data tinyxml-devel tinyxml2-devel typelib-1_0-Xdp-1_0 typelib-1_0-XdpGtk3-1_0 typelib-1_0-XdpGtk4-1_0 typescript unzip update-desktop-files upower wayland-protocols-devel webp-pixbuf-loader wf-recorder wget wireplumber wl-clipboard wl-clipboard xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils xrandr
-    sudo zypper in -t pattern gnome
+    sudo zypper in --no-confirm axel blueprint-compiler bluez bluez-auto-enable-devices bluez-cups bluez-firmware brightnessctl cairomm-devel cairomm1_0-devel cargo cliphist cmake coreutils curl dart-sass ddcutil file-devel fish fontconfig foot fuzzel gammastep gdouros-symbola-fonts gjs gjs-devel gnome-bluetooth gnome-bluetooth gnome-bluetooth gnome-control-center gnome-keyring gobject-introspection gobject-introspection-devel gojq grim gtk-layer-shell-devel gtk3 gtk3-metatheme-adwaita gtk4-devel gtkmm3-devel gtksourceview-devel gtksourceviewmm-devel gtksourceviewmm3_0-devel hypridle hyprland hyprlang-devel jetbrains-mono-fonts kernel-firmware-bluetooth lato-fonts libadwaita-devel libcairomm-1_0-1 libcairomm-1_16-1 libdbusmenu-gtk3-4 libdbusmenu-gtk3-devel libdbusmenu-gtk4 libdrm-devel libgbm-devel libgnome-bluetooth-3_0-13 libgtksourceview-3_0-1 libgtksourceviewmm-3_0-0 libgtksourceviewmm-4_0-0 libjxl-devel libpulse-devel libqt5-qtwayland libsass-3_6_6-1 libsass-devel libsoup-devel libspng0-devel libtinyxml0 libtinyxml2-10 libwebp-devel libxdp-devel Mesa-libGLESv2-devel Mesa-libGLESv3-devel meson NetworkManager npm opi pam-devel pavucontrol playerctl polkit-gnome pugixml-devel python3-anyascii python3-base python3-build python3-gobject-devel python3-libsass python3-material-color-utilities-python python3-Pillow python3-pip python3-psutil python3-pywayland python3-regex python3-setuptools_scm python3-svglib python3-wheel qt5ct qt6-quickcontrols2-devel qt6-wayland qt6-waylandclient-devel qt6-waylandclient-private-devel qt6-widgets-devel ripgrep rsync scdoc sdbus-cpp-devel slurp starship swappy swww systemd-devel tesseract tesseract-data tinyxml-devel tinyxml2-devel typelib-1_0-Xdp-1_0 typelib-1_0-XdpGtk3-1_0 typelib-1_0-XdpGtk4-1_0 typescript unzip update-desktop-files upower wayland-protocols-devel webp-pixbuf-loader wf-recorder wget wireplumber wl-clipboard wl-clipboard xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils xrandr ydotool
+    sudo zypper in --type --no-confirm pattern gnome
     
     _log "[ i ] Installing dependencies from opi"
     _log "[ ! ] Select 'yad' and then 'multimedia_proaudio' or 'Dead_Mozay' repo"
@@ -61,30 +61,6 @@ _fetch_fonts() {
 }
 
 #_fetch_cursor() {# WIP}
-
-_install_cliphist() {
-    _log "[ i ] Installing cliphist"
-    cd "$t"
-    wget https://github.com/sentriz/cliphist/releases/download/v0.6.1/v0.6.1-linux-amd64 -O cliphist && \
-        chmod +x cliphist && \
-        sudo cp -v cliphist /usr/local/bin/cliphist
-}
-
-_install_ydotool() {
-    _log "[ i ] Installing ydotool"
-    cd "$t"
-    git clone https://github.com/ReimuNotMoe/ydotool && \
-        cd ydotool
-    mkdir build && cd build
-    cmake -DSYSTEMD_USER_SERVICE=OFF -DSYSTEMD_SYSTEM_SERVICE=ON ..
-    make -j $(nproc)
-    sudo make install
-    sudo chmod +s "$(which ydotool)"
-    sudo systemctl daemon-reload
-    sudo systemctl enable ydotoold
-    sudo systemctl start ydotoold
-    ln -sf /tmp/.ydotool_socket /run/user/$(id -u $(whoami))/.ydotool_socket
-}
 
 _install_hyprutils() {
     _log "[ i ] Installing hyprutils"
@@ -114,25 +90,6 @@ _install_hyprgraphics() {
 	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
 	cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
 	sudo cmake --install build
-}
-
-_install_dartsass() {
-    _log "[ i ] Installing dart-sass"
-    cd "$t"
-    wget https://github.com/sass/dart-sass/releases/download/1.80.6/dart-sass-1.80.6-linux-x64.tar.gz
-    tar -xzf dart-sass-1.80.6-linux-x64.tar.gz
-    cd dart-sass
-    sudo cp -rf * /usr/local/bin/
-}
-
-_install_sdbus_cpp() {
-    _log "[ i ] Installing sdbus-cpp"
-    cd "$t"
-    git clone https://github.com/Kistler-Group/sdbus-cpp.git
-    cd sdbus-cpp
-    cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
-    cmake --build ./build -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
-    sudo cmake --build ./build --target install
 }
 
 _install_hyprwayland_scanner() {
@@ -165,15 +122,6 @@ _install_hyprland_qtutils() {
 	sudo cmake --install build
 }
 
-_install_hyprland() {
-    _log "[ i ] Installing Hyprland"
-    cd "$t"
-    sudo zypper in gcc-c++ git meson cmake "pkgconfig(cairo)" "pkgconfig(egl)" "pkgconfig(gbm)" "pkgconfig(gl)" "pkgconfig(glesv2)" "pkgconfig(libdrm)" "pkgconfig(libinput)" "pkgconfig(libseat)" "pkgconfig(libudev)" "pkgconfig(pango)" "pkgconfig(pangocairo)" "pkgconfig(pixman-1)" "pkgconfig(vulkan)" "pkgconfig(wayland-client)" "pkgconfig(wayland-protocols)" "pkgconfig(wayland-scanner)" "pkgconfig(wayland-server)" "pkgconfig(xcb)" "pkgconfig(xcb-icccm)" "pkgconfig(xcb-renderutil)" "pkgconfig(xkbcommon)" "pkgconfig(xwayland)" "pkgconfig(xcb-errors)" glslang-devel Mesa-libGLESv3-devel tomlplusplus-devel
-    git clone --recursive https://github.com/hyprwm/Hyprland && \
-        cd Hyprland
-    make all && sudo make install
-}
-
 _install_wlogout() {
     _log "[ i ] Installing wlogout"
     cd "$t"
@@ -187,7 +135,7 @@ _install_wlogout() {
 _install_anyrun() {
     _log "[ i ] Installing anyrun"
     cd "$t"
-    git clone https://github.com/Kirottu/anyrun.git
+    git clone https://github.com/anyrun-org/anyrun.git
     cd anyrun
     cargo build --release
     cargo install --path anyrun/
@@ -234,12 +182,8 @@ _program() {
     _fetch_configs
     _fetch_fonts
     #_fetch_cursor   # Work in progress
-    _install_cliphist
-    _install_ydotool
-    _install_dartsass
     _install_hyprutils
     _install_hyprwayland_scanner
-    _install_sdbus_cpp
     _install_hyprpicker
     _install_hyprgraphics
     _install_hyprlock
