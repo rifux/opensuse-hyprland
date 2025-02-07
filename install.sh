@@ -162,7 +162,7 @@ _install_wlogout() {
 _install_anyrun() {
     _log "[ i ] Installing anyrun"
     cd "$t"
-    git clone https://github.com/Kirottu/anyrun.git
+    git clone https://github.com/anyrun-org/anyrun.git
     cd anyrun
     cargo build --release
     cargo install --path anyrun/
