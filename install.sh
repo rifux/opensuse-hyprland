@@ -198,17 +198,6 @@ _install_anyrun() {
     cp examples/config.ron ~/.config/anyrun/config.ron
 }
 
-_install_gradience() {
-    _log "[ i ] Installing gradience"
-    cd "$t"
-    git clone https://github.com/GradienceTeam/Gradience.git
-    cd Gradience
-    git submodule update --init --recursive
-    meson setup builddir
-    meson configure builddir -Dprefix=/usr/local
-    sudo ninja -C builddir install
-}
-
 _exec_manualinstaller() {
     _log "[ ! ] Now manual installer of end-4/dots will be started."
     read -p "[ ? ] Press 'Enter' to continue"
@@ -258,7 +247,6 @@ _program() {
     _install_hyprland_qtutils
     _install_wlogout
     _install_anyrun
-    _install_gradience
     _exec_manualinstaller
     _remove_transparency
 }
