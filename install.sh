@@ -130,15 +130,6 @@ _install_hyprland_qtutils() {
 	sudo cmake --install build
 }
 
-_install_hyprland() {
-    _log "[ i ] Installing Hyprland"
-    cd "$t"
-    sudo zypper in gcc-c++ git meson cmake "pkgconfig(cairo)" "pkgconfig(egl)" "pkgconfig(gbm)" "pkgconfig(gl)" "pkgconfig(glesv2)" "pkgconfig(libdrm)" "pkgconfig(libinput)" "pkgconfig(libseat)" "pkgconfig(libudev)" "pkgconfig(pango)" "pkgconfig(pangocairo)" "pkgconfig(pixman-1)" "pkgconfig(vulkan)" "pkgconfig(wayland-client)" "pkgconfig(wayland-protocols)" "pkgconfig(wayland-scanner)" "pkgconfig(wayland-server)" "pkgconfig(xcb)" "pkgconfig(xcb-icccm)" "pkgconfig(xcb-renderutil)" "pkgconfig(xkbcommon)" "pkgconfig(xwayland)" "pkgconfig(xcb-errors)" glslang-devel Mesa-libGLESv3-devel tomlplusplus-devel
-    git clone --recursive https://github.com/hyprwm/Hyprland && \
-        cd Hyprland
-    make all && sudo make install
-}
-
 _install_wlogout() {
     _log "[ i ] Installing wlogout"
     cd "$t"
