@@ -27,9 +27,11 @@ _cleanup() {
 }
 
 _add_repo() {
-    _log "[ i ] Adding home:rifux.dev repository"
-    sudo zypper --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
-    sudo zypper ref
+    if ! zypper lr --alias rifux.dev &>/dev/null; then    
+        _log "[ i ] Adding home:rifux.dev repository"
+        sudo zypper --gpg-auto-import-keys ar -f https://download.opensuse.org/repositories/home:/rifux.dev/openSUSE_Tumbleweed/home:rifux.dev.repo
+        sudo zypper ref
+    fi
 }
 
 _install_deps() {
