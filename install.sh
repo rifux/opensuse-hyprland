@@ -62,14 +62,6 @@ _fetch_fonts() {
 
 #_fetch_cursor() {# WIP}
 
-_enable_ydotool() {
-    _log "[ i ] Enabling ydotool"
-    sudo systemctl daemon-reload
-    sudo systemctl enable ydotoold
-    sudo systemctl start ydotoold
-    ln -sf /tmp/.ydotool_socket /run/user/$(id -u $(whoami))/.ydotool_socket
-}
-
 _install_hyprutils() {
     _log "[ i ] Installing hyprutils"
     cd "$t"
@@ -190,7 +182,6 @@ _program() {
     _fetch_configs
     _fetch_fonts
     #_fetch_cursor   # Work in progress
-    _enable_ydotool
     _install_hyprutils
     _install_hyprwayland_scanner
     _install_hyprpicker
