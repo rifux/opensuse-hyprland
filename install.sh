@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Copyright (C) 2024 Vladimir `rifux` Blinkov
+# Copyright (C) 2024-2025 Vladimir `rifux` Blinkov
 #
 # SPDX-License-Identifier: MIT
 #
