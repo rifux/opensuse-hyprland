@@ -36,7 +36,7 @@ _add_repo() {
 
 _install_deps() {
     _log "[ i ] Installing dependencies from Tumbleweed repo"
-    sudo zypper in --no-confirm axel blueprint-compiler bluez bluez-auto-enable-devices bluez-cups bluez-firmware brightnessctl cairomm-devel cairomm1_0-devel cargo cliphist cmake coreutils curl dart-sass ddcutil file-devel fish fontconfig foot fuzzel gammastep gdouros-symbola-fonts gjs gjs-devel gnome-bluetooth gnome-bluetooth gnome-bluetooth gnome-control-center gnome-keyring gobject-introspection gobject-introspection-devel gojq grim gtk-layer-shell-devel gtk3 gtk3-metatheme-adwaita gtk4-devel gtkmm3-devel gtksourceview-devel gtksourceviewmm-devel gtksourceviewmm3_0-devel hypridle hyprland hyprlang-devel jetbrains-mono-fonts kernel-firmware-bluetooth lato-fonts libadwaita-devel libcairomm-1_0-1 libcairomm-1_16-1 libdbusmenu-gtk3-4 libdbusmenu-gtk3-devel libdbusmenu-gtk4 libdrm-devel libgbm-devel libgnome-bluetooth-3_0-13 libgtksourceview-3_0-1 libgtksourceviewmm-3_0-0 libgtksourceviewmm-4_0-0 libjxl-devel libpulse-devel libqt5-qtwayland libsass-3_6_6-1 libsass-devel libsoup-devel libspng0-devel libtinyxml0 libtinyxml2-10 libwebp-devel libxdp-devel Mesa-libGLESv2-devel Mesa-libGLESv3-devel meson NetworkManager npm opi pam-devel pavucontrol playerctl polkit-gnome pugixml-devel python3-anyascii python3-base python3-build python3-gobject-devel python3-libsass python3-material-color-utilities-python python3-Pillow python3-pip python3-psutil python3-pywayland python3-regex python3-setuptools_scm python3-svglib python3-wheel qt5ct qt6-quickcontrols2-devel qt6-wayland qt6-waylandclient-devel qt6-waylandclient-private-devel qt6-widgets-devel ripgrep rsync scdoc slurp starship swappy swww systemd-devel tesseract tesseract-data tinyxml-devel tinyxml2-devel typelib-1_0-Xdp-1_0 typelib-1_0-XdpGtk3-1_0 typelib-1_0-XdpGtk4-1_0 typescript unzip update-desktop-files upower wayland-protocols-devel webp-pixbuf-loader wf-recorder wget wireplumber wl-clipboard wl-clipboard xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils xrandr ydotool
+    sudo zypper in --no-confirm axel blueprint-compiler bluez bluez-auto-enable-devices bluez-cups bluez-firmware brightnessctl cairomm-devel cairomm1_0-devel cargo cliphist cmake coreutils curl dart-sass ddcutil file-devel fish fontconfig foot fuzzel gammastep gdouros-symbola-fonts gjs gjs-devel gnome-bluetooth gnome-bluetooth gnome-bluetooth gnome-control-center gnome-keyring gobject-introspection gobject-introspection-devel gojq grim gtk-layer-shell-devel gtk3 gtk3-metatheme-adwaita gtk4-devel gtkmm3-devel gtksourceview-devel gtksourceviewmm-devel gtksourceviewmm3_0-devel hypridle hyprland hyprlang-devel jetbrains-mono-fonts kernel-firmware-bluetooth lato-fonts libadwaita-devel libcairomm-1_0-1 libcairomm-1_16-1 libdbusmenu-gtk3-4 libdbusmenu-gtk3-devel libdbusmenu-gtk4 libdrm-devel libgbm-devel libgnome-bluetooth-3_0-13 libgtksourceview-3_0-1 libgtksourceviewmm-3_0-0 libgtksourceviewmm-4_0-0 libjxl-devel libpulse-devel libqt5-qtwayland libsass-3_6_6-1 libsass-devel libsoup-devel libspng0-devel libtinyxml0 libtinyxml2-10 libwebp-devel libxdp-devel Mesa-libGLESv2-devel Mesa-libGLESv3-devel meson NetworkManager npm opi pam-devel pavucontrol playerctl polkit-gnome pugixml-devel python3-anyascii python3-base python3-build python3-gobject-devel python3-libsass python3-material-color-utilities-python python3-Pillow python3-pip python3-psutil python3-pywayland python3-regex python3-setuptools_scm python3-svglib python3-wheel qt5ct qt6-quickcontrols2-devel qt6-wayland qt6-waylandclient-devel qt6-waylandclient-private-devel qt6-widgets-devel ripgrep rsync scdoc sdbus-cpp-devel slurp starship swappy swww systemd-devel tesseract tesseract-data tinyxml-devel tinyxml2-devel typelib-1_0-Xdp-1_0 typelib-1_0-XdpGtk3-1_0 typelib-1_0-XdpGtk4-1_0 typescript unzip update-desktop-files upower wayland-protocols-devel webp-pixbuf-loader wf-recorder wget wireplumber wl-clipboard wl-clipboard xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils xrandr ydotool
     sudo zypper in -t pattern gnome
     
     _log "[ i ] Installing dependencies from opi"
@@ -98,16 +98,6 @@ _install_hyprgraphics() {
 	cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
 	cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
 	sudo cmake --install build
-}
-
-_install_sdbus_cpp() {
-    _log "[ i ] Installing sdbus-cpp"
-    cd "$t"
-    git clone https://github.com/Kistler-Group/sdbus-cpp.git
-    cd sdbus-cpp
-    cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
-    cmake --build ./build -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
-    sudo cmake --build ./build --target install
 }
 
 _install_hyprwayland_scanner() {
@@ -212,7 +202,6 @@ _program() {
     _enable_ydotool
     _install_hyprutils
     _install_hyprwayland_scanner
-    _install_sdbus_cpp
     _install_hyprpicker
     _install_hyprgraphics
     _install_hyprlock
