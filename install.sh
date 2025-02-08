@@ -160,27 +160,6 @@ _exec_manualinstaller() {
     ./manual-install-helper.sh
 }
 
-# Temporary workaround to fix an issue with AGS transparency (without it, panel has broken gtk-2 alike look)
-_remove_transparency() {
-    _file="$HOME/.config/ags/modules/sideright/centermodules/configure.js"
-
-    sed -i -e \
-        "s|                        ConfigToggle({|\/\*                        ConfigToggle({|g" \
-        "$_file"
-    sed -i -e \
-        "s|console\.log(transparency)\;|console\.log(transparency)\;\*\/|g" \
-        "$_file"
-    sed -i -e \
-        "s|                                execAsync(|\/\/                                execAsync(|g" \
-        "$_file"
-    sed -i -e \
-        "s|                                    .then(execAsync(|\/\*                                    .then(execAsync(|g" \
-        "$_file"
-    sed -i -e \
-        "s|                        HyprlandToggle({ icon: 'blur_on'|\*\/                        HyprlandToggle({ icon: 'blur_on'|g" \
-        "$_file"
-}
-
 # Main program execution flow
 _program() {
     _cleanup
@@ -199,7 +178,6 @@ _program() {
     _install_wlogout
     _install_anyrun
     _exec_manualinstaller
-    _remove_transparency
 }
 
 _program
